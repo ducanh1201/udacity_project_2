@@ -5,20 +5,20 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
-- [OPTIONAL] Top 5 most popular products 
-- [OPTIONAL] Products by category (args: product category)
+- Index: '/products' [GET] 
+- Show: '/products/:id' [GET] 
+- Create: [token required] '/products' [POST] 
+- Top 5 most popular products: '/products/top5' [GET] 
+- Products by category (args: product category): '/products/category/:category' [GET] 
 
 #### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+- Index: [token required] '/users' [GET] 
+- Show: [token required] '/users/:id' [GET] 
+- Create: [token required] '/users' [POST] 
+- Login: 'users/login' [POST]
 
 #### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+- Current Order by user (args: user id)[token required] '/orders' [GET] 
 
 ## Data Shapes
 #### Product
@@ -27,11 +27,25 @@ These are the notes from a meeting with the frontend developer that describe wha
 - price
 - [OPTIONAL] category
 
+TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    price integer NOT NULL,
+    category VARCHAR(150)
+);
+
 #### User
 - id
-- firstName
-- lastName
+- firstname
+- lastname
 - password
+
+TABLE users (
+    id SERIAL PRIMARY KEY,
+    firstname VARCHAR(150),
+    lastname VARCHAR(150),
+    password_digest VARCHAR NOT NULL
+);
 
 #### Orders
 - id
@@ -40,3 +54,15 @@ These are the notes from a meeting with the frontend developer that describe wha
 - user_id
 - status of order (active or complete)
 
+TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id integer NOT NULL REFERENCES users(id),
+    status VARCHAR(10)
+);
+
+TABLE order_products (
+    order_product_id SERIAL PRIMARY KEY,
+    order_id INTEGER NOT NULL REFERENCES orders(id),
+    product_id INTEGER NOT NULL REFERENCES products(id),
+    quantity INTEGER NOT NULL
+);

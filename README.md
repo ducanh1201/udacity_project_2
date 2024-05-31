@@ -45,5 +45,7 @@ npm run watch
 ```
 npm run test
 ```
-
-
+### Ports 
+- Port 3000 for express backend server.
+- Start the server on port http://localhost:3000.
+- The database port will run on Port: 5432 using Postgres.

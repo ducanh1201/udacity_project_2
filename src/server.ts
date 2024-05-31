@@ -7,6 +7,7 @@ import product_routes from './handlers/products'
 
 const app: express.Application = express()
 const address: string = "0.0.0.0:3000"
+const port = 3000
 const corsOptions = {
     origin: address,
     optionSuccessStatus: 200,
@@ -22,7 +23,7 @@ app.get('/', function (req: Request, res: Response) {
 user_routes(app);
 order_routes(app);
 product_routes(app);
-app.listen(3000, function () {
+app.listen(port, function () {
     console.log(`starting app on: ${address}`)
 })
 

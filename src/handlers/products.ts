@@ -1,11 +1,12 @@
 import express, { Request, Response } from 'express';
 import { ProductStore } from '../models/products';
+import { verifyToken } from '../middlewares/auth';
 
 
 const product_routes = (app: express.Application) => {
   app.get('/products', index);
   app.get('/products/:id', show);
-  app.post('/products', create);
+  app.post('/products', verifyToken,create);
 
 }
 

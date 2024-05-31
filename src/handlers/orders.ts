@@ -50,6 +50,7 @@ const addProduct = async (req: Request, res: Response) => {
             product_id: productId,
             quantity: quantity,
         }
+
         const updatedOrder = await store.addProduct(orderProductInput);
         res.json(updatedOrder);
     } catch (error) {

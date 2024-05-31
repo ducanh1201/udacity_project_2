@@ -10,7 +10,7 @@ const tokenSecret = process.env.TOKEN_SECRET as string;
 export const user_routes = (app: express.Application) => {
   app.get("/users", verifyToken, index);
   app.get("/users/:id", verifyToken, show);
-  app.post("/users", create);
+  app.post("/users",verifyToken, create);
   app.post("/users/login", login);
 };
 
